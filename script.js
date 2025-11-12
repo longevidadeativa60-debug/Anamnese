@@ -807,35 +807,14 @@ function renderSummary() {
                     </div>
                 </div>
 
-   
-
-
-
-
-
-            
-
                 <div class="summary-actions">
                     <button class="btn btn-outline" onclick="state.showSummary = false; render();">
                         Voltar ao Formulário
                     </button>
-                    <button class="btn btn-primary" onclick="exportSummaryAsPNG()">
-                        🖼️ Exportar como Imagem (PNG)
+                    <button class="btn btn-primary" onclick="showToast('Funcionalidade de Exportar em desenvolvimento', 'info');">
+                        Exportar Sumário
                     </button>
                 </div>
-            </div>
-        </div>
-    `;
-}
-// ...
-
-
-
-
-
-
-
-            
             </div>
         </div>
     `;
@@ -880,48 +859,4 @@ function toggleGoal(goal) {
         state.formData.primaryGoals.push(goal);
     }
     render();
-}
-
-
-
-
-
-
-
-// ... no final de script.js
-
-function exportSummaryAsPNG() {
-    const summaryCard = document.querySelector('.summary-card'); // Seleciona o elemento que contém o sumário
-    
-    // Esconder botões de ação para a imagem
-    const summaryActions = document.querySelector('.summary-actions');
-    if (summaryActions) {
-        summaryActions.style.display = 'none';
-    }
-
-    html2canvas(summaryCard, { 
-        scale: 2, // Melhor qualidade para texto
-        allowTaint: true 
-    }).then(canvas => {
-        // Restaurar a exibição dos botões
-        if (summaryActions) {
-            summaryActions.style.display = 'flex';
-        }
-        
-        // Criar um link para download da imagem
-        const image = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = image;
-        link.download = 'Anamnese_Fitness_Sumario.png';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        showToast('Sumário exportado como PNG!', 'success');
-    }).catch(error => {
-        if (summaryActions) {
-            summaryActions.style.display = 'flex';
-        }
-        showToast('Erro ao exportar sumário: ' + error.message, 'error');
-    });
 }
