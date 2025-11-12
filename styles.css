@@ -1,0 +1,546 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0891b2;
+    --primary-dark: #0e7490;
+    --background: #ffffff;
+    --foreground: #1e293b;
+    --card: #f8fafc;
+    --card-border: #e2e8f0;
+    --muted: #64748b;
+    --success: #10b981;
+    --error: #ef4444;
+    --radius: 8px;
+    --spacing: 1rem;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.container-wide {
+    max-width: 1200px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+}
+
+.hero p {
+    font-size: 1.125rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    margin: 2rem auto;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--foreground);
+    border: 2px solid var(--card-border);
+}
+
+.btn-outline:hover:not(:disabled) {
+    background-color: var(--card);
+}
+
+/* Cards */
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+}
+
+.card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+.required::after {
+    content: " *";
+    color: var(--error);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius);
+    background-color: white;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-hint {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+}
+
+/* Radio Groups */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.radio-option {
+    flex: 1;
+    min-width: 150px;
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-label {
+    display: block;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    background-color: white;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.radio-label:hover {
+    border-color: var(--primary);
+}
+
+/* Checkbox Groups */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-option input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Slider */
+.slider-container {
+    margin: 1rem 0;
+}
+
+.slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--card-border);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    border: none;
+}
+
+.slider-value {
+    display: inline-block;
+    margin-left: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Progress Indicator */
+.progress {
+    margin-bottom: 2rem;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.progress-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.progress-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background-color: var(--card-border);
+    z-index: -1;
+}
+
+.progress-step.active:not(:last-child)::after,
+.progress-step.completed:not(:last-child)::after {
+    background-color: var(--primary);
+}
+
+.progress-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--card);
+    border: 2px solid var(--card-border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.progress-step.active .progress-number {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.progress-step.completed .progress-number {
+    background-color: var(--success);
+    color: white;
+    border-color: var(--success);
+}
+
+.progress-label {
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+.progress-step.active .progress-label {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Navigation */
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Summary */
+.summary-card {
+    background-color: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+}
+
+.summary-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--card-border);
+}
+
+.summary-header h1 {
+    font-size: 2rem;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+}
+
+.summary-section {
+    margin-bottom: 2rem;
+}
+
+.summary-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 0.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-label {
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.summary-value {
+    font-weight: 600;
+    color: var(--foreground);
+    text-align: right;
+}
+
+.bmi-indicator {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.bmi-underweight {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.bmi-normal {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.bmi-overweight {
+    background-color: #fed7aa;
+    color: #9a3412;
+}
+
+.bmi-obese {
+    background-color: #fecaca;
+    color: #991b1b;
+}
+
+.summary-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--foreground);
+    color: white;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.3s;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.error {
+    background-color: var(--error);
+}
+
+.toast.success {
+    background-color: var(--success);
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--muted);
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .progress-label {
+        font-size: 0.75rem;
+    }
+    
+    .radio-option {
+        min-width: 100%;
+    }
+    
+    .form-navigation {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .summary-actions {
+        flex-direction: column;
+    }
+}
+
+@media print {
+    .btn,
+    .form-navigation,
+    .summary-actions {
+        display: none;
+    }
+}
