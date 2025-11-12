@@ -811,7 +811,7 @@ function renderSummary() {
                     <button class="btn btn-outline" onclick="state.showSummary = false; render();">
                         Voltar ao Formulário
                     </button>
-                    <button class="btn btn-primary" onclick="showToast('Funcionalidade de Exportar em desenvolvimento', 'info');">
+                    <button class="btn btn-primary" onclick="exportSummary()">
                         Exportar Sumário
                     </button>
                 </div>
@@ -850,6 +850,50 @@ function backToForm() {
 
 // Initial Render
 render();
+
+// Export Functionality
+function exportSummary() {
+    const summaryCard = document.querySelector('.summary-card');
+    if (!summaryCard) {
+        showToast('Erro: Não foi possível encontrar o sumário para exportação.', 'error');
+        return;
+    }
+
+    // Temporarily hide action buttons for a cleaner screenshot
+    const actions = summaryCard.querySelector('.summary-actions');
+    if (actions) {
+        actions.style.display = 'none';
+    }
+
+    html2canvas(summaryCard, {
+        scale: 2, // Increase scale for better resolution
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#f8fafc' // Use the card background color
+    }).then(canvas => {
+        // Restore action buttons display
+        if (actions) {
+            actions.style.display = 'flex';
+        }
+
+        const image = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = 'Anamnese_Completa_Sumario.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showToast('Sumário exportado com sucesso!', 'success');
+    }).catch(error => {
+        console.error('Erro ao gerar imagem:', error);
+        // Restore action buttons display in case of error
+        if (actions) {
+            actions.style.display = 'flex';
+        }
+        showToast('Erro ao exportar sumário. Tente novamente.', 'error');
+    });
+}
 
 function toggleGoal(goal) {
     const index = state.formData.primaryGoals.indexOf(goal);
